@@ -4,8 +4,8 @@ apply plugin: 'kotlin-parcelize'
 apply plugin: 'com.google.devtools.ksp'
 
 android {
-    applicationVariants.all { variant ->
-        variant.outputs.all { output ->
+    applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach { output ->
             outputFileName = defaultConfig.applicationId + "-v${variant.versionName}-${variant.name}.apk"
         }
     }
@@ -16,16 +16,16 @@ android {
         disable 'MissingTranslation', 'GoogleAppIndexingWarning'
     }
 
-    compileSdkVersion Versions.targetSdk
-    buildToolsVersion Versions.buildTools
+    compileSdk Versions.targetSdk
+    buildToolsVersion = Versions.buildTools
 
     namespace MyApp.appId
     defaultConfig {
-        buildConfigField("String", "ONESIGNAL_APP_ID", "\"$OneSignal.appId\"")
-        manifestPlaceholders = [
-                onesignal_app_id               : OneSignal.appId,
-                onesignal_google_project_number: OneSignal.googleProjectNumber
-        ]
+//        buildConfigField("String", "ONESIGNAL_APP_ID", "\"$OneSignal.appId\"")
+//        manifestPlaceholders = [
+//                onesignal_app_id               : OneSignal.appId,
+//                onesignal_google_project_number: OneSignal.googleProjectNumber
+//        ]
         applicationId MyApp.appId
         minSdkVersion Versions.minSdk
         targetSdkVersion Versions.targetSdk
@@ -47,9 +47,9 @@ android {
     }
 
     buildTypes {
-        buildTypes.each {
-            it.buildConfigField("String", "ONESIGNAL_APP_ID", "\"$OneSignal.appId\"")
-        }
+//        buildTypes.each {
+//            it.buildConfigField("String", "ONESIGNAL_APP_ID", "\"$OneSignal.appId\"")
+//        }
         release {
             debuggable false
             zipAlignEnabled true
@@ -93,6 +93,4 @@ dependencies {
     implementation(Libs.frames) {
         transitive = true
     }
-    // TODO: Remove comment marks to enable
-    // implementation Libs.oneSignal
 }

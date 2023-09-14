@@ -7,7 +7,7 @@ import dev.jahir.frames.ui.FramesApplication
 // import com.onesignal.OSNotificationReceivedEvent
 // import dev.jahir.frames.extensions.context.preferences
 
-class MyApplication : FramesApplication(BuildConfig.ONESIGNAL_APP_ID) {
+class MyApplication : FramesApplication() {
     override fun onCreate() {
         super.onCreate()
         // TODO: Remove comment marks to enable
